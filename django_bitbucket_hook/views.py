@@ -18,9 +18,7 @@ def only_hook(request):
         hook.execute()
     except Hook.DoesNotExist:
         return JsonResponse({'success': False, 'message': 'Not exist Hook'})
-        # If there is not a script defined, then send a HookSignal
-        # TODO
-    return JsonResponse({})
+    return JsonResponse({'success': True})
 
 
 @csrf_exempt
@@ -36,9 +34,7 @@ def hook_name(request, name):
         hook.execute()
     except Hook.DoesNotExist:
         return JsonResponse({'success': False, 'message': 'Not exist Hook'})
-        # If there is not a script defined, then send a HookSignal
-        # TODO
-    return JsonResponse({})
+    return JsonResponse({'success': True})
 
 
 @csrf_exempt
@@ -63,9 +59,7 @@ def hook_name_branch(request, name, branch):
         hook.execute()
     except Hook.DoesNotExist:
         return JsonResponse({'success': False, 'message': 'Not exist Hook'})
-        # If there is not a script defined, then send a HookSignal
-        # TODO
-    return JsonResponse({})
+    return JsonResponse({'success': True})
 
 
 def get_payload(request):
