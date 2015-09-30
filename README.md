@@ -17,7 +17,8 @@ Tested on Python 2.7 and 3.4, with Django 1.7 and 1.8. The minimum version of Dj
   * Path - Full path to the script to be executed ( Example: ```/home/test/test-repo/execute-script.sh``` )
   * Branch - Which branch to be monitored ( Example: ```dev```, ```master```, ```test```, ```stage``` ...etc )
 7. Go to set up your Webhook
-8. Examples URLS
+8. If everything is okay you will get the following response in Webhook (```{'success': True}```)
+9. Examples URLS
   * http[s]://domain/hook -> Gets the Hook that corresponds to the user name, and repo name
   * http[s]://domain/hook/name -> Gets the hook that fits the following name
   * http[s]://domain/hook/name/branch -> Gets the Hook which has the same name and branch of the repository
