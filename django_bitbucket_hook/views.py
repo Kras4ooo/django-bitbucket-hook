@@ -8,7 +8,7 @@ from django_bitbucket_hook.models import Hook
 @csrf_exempt
 @require_http_methods(["POST"])
 def only_hook(request):
-    info, user, repo = get_payload(request)
+    payload, user, repo = get_payload(request)
 
     if not user and not repo:
         return JsonResponse({'success': False, 'message': 'No JSON data or URL argument : cannot identify hook'})
@@ -26,7 +26,7 @@ def only_hook(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def hook_name(request, name):
-    info, user, repo = get_payload(request)
+    payload, user, repo = get_payload(request)
 
     if not user and not repo and not name:
         return JsonResponse({'success': False, 'message': 'No JSON data or URL argument : cannot identify hook'})
@@ -44,8 +44,12 @@ def hook_name(request, name):
 @csrf_exempt
 @require_http_methods(["POST"])
 def hook_name_branch(request, name, branch):
-    info, user, repo = get_payload(request)
-    repo_branch = info.get('ref', False)
+    payload, user, repo = get_payload(request)
+    repo_branch = payload.get('ref', False)
+
+    if repo_branch is False:
+        return JsonResponse({'success': False, 'message': 'Not exist branch'})
+
     _, repo_branch = repo_branch.rsplit('/', 1)
 
     if not user and not repo and not name and not branch and not repo_branch:
@@ -72,12 +76,12 @@ def get_payload(request):
         # Probably application/x-www-form-urlencoded
         payload = json.loads(request.POST.get("payload", "{}"))
 
-    info = payload.get('repository', {})
+    repo_data = payload.get('repository', {})
 
-    user = info.get('owner', {})
-    repo = info.get('name', None)
+    user = repo_data.get('owner', {})
+    repo = repo_data.get('name', None)
 
     if isinstance(user, dict):
         user = user.get('name', None)
 
-    return info, user, repo
+    return payload, user, repo

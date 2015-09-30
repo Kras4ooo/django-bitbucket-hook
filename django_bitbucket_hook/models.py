@@ -12,7 +12,7 @@ class Hook(models.Model):
     branch = models.CharField(max_length=255)
 
     def execute(self):
-        subprocess.call([unicode(self.path)])
+        subprocess.call([self.path.encode('utf-8')])
 
     def __str__(self):
         return "%s (%s/%s)" % (self.name, self.user, self.repo)
