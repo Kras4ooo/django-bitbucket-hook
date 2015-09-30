@@ -1,4 +1,1 @@
-# django-bitbucket-hook
-
-  image:: https://travis-ci.org/sheppard/django-github-hook.svg?branch=master
-    :target: https://travis-ci.org/sheppard/django-github-hook
+# django-bitbucket-hook [![BuildStatus](https://travis-ci.org/Kras4ooo/django-bitbucket-hook.svg?branch=master)](https://travis-ci.org/Kras4ooo/django-bitbucket-hook)
