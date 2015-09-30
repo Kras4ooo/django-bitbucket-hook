@@ -29,6 +29,10 @@ class DjangoBitbucketHookTestCase(TestCase):
             }
         """
 
+    def tearDown(self):
+        if os.path.isfile("test.txt"):
+            os.remove('test.txt')
+
     def test_broke__main_url(self):
         response = self.client.post('/')
         content = json.loads(response.content.decode('utf-8'))
@@ -62,6 +66,7 @@ class DjangoBitbucketHookTestCase(TestCase):
         response = self.client.post('/test-name', data)
         content = json.loads(response.content.decode('utf-8'))
         self.assertIsInstance(content, dict)
+        self.assertTrue(content['success'])
         self.assertEqual(response.status_code, 200)
 
     def test_repo_broke_branch_url(self):
@@ -78,5 +83,5 @@ class DjangoBitbucketHookTestCase(TestCase):
         response = self.client.post('/test-name/master', data)
         content = json.loads(response.content.decode('utf-8'))
         self.assertIsInstance(content, dict)
-        self.assertFalse(bool(content))
+        self.assertTrue(content['success'])
         self.assertEqual(response.status_code, 200)
