@@ -23,5 +23,5 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     description='',
-    test_suite='django_bitbucket_hook'
+    test_suite='tests'
 )
