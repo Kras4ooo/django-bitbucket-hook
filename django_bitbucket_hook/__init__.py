@@ -9,5 +9,6 @@ import django
 if hasattr(django, 'setup'):
     django.setup()
 
+
 from django.core.management import call_command
 call_command('migrate')
