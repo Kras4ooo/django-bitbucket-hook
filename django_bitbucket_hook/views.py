@@ -44,9 +44,12 @@ def hook_name_branch(request, name, branch):
     repo_branch = payload.get('ref', False)
 
     if repo_branch is False:
-        return JsonResponse({'success': False, 'message': 'Not exist branch'})
-
-    _, repo_branch = repo_branch.rsplit('/', 1)
+        repo_branch = payload.get('commits', False)
+        if repo_branch is False:
+            return JsonResponse({'success': False, 'message': 'Not exist branch'})
+        repo_branch = repo_branch[0].get('branch', False)
+    else:
+        _, repo_branch = repo_branch.rsplit('/', 1)
 
     if not user and not repo and not name and not branch and not repo_branch:
         return JsonResponse({'success': False, 'message': 'No JSON data or URL argument : cannot identify hook'})
