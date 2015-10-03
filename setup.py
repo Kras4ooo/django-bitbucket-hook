@@ -1,14 +1,15 @@
 from setuptools import setup
-
+long_description = open('README.rst').read()
 
 setup(
     name='django-bitbucket-hook',
-    version='1.0.0',
+    version='1.0.1',
     packages=['django_bitbucket_hook', 'django_bitbucket_hook.migrations'],
     url='https://github.com/Kras4ooo/django-bitbucket-hook',
     license='Apache License Version 2.0',
     author='Krasimir',
     author_email='krasimir.nikolov1994@gmail.com',
+    long_description=long_description,
     classifiers=[
         'Intended Audience :: Developers',
         'Framework :: Django :: 1.7',
@@ -22,6 +23,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    description='',
+    description='Django module',
     test_suite='tests'
 )
