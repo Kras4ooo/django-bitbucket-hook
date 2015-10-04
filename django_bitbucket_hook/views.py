@@ -79,6 +79,6 @@ def get_payload(request):
     repo = repo_data.get('name', None)
 
     if isinstance(user, dict):
-        user = user.get('name', None)
+        user = user.get('name', user.get('username', None))
 
     return payload, user, repo
