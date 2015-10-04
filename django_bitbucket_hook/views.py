@@ -41,15 +41,12 @@ def hook_name(request, name):
 @require_http_methods(["POST"])
 def hook_name_branch(request, name, branch):
     payload, user, repo = get_payload(request)
-    repo_branch = payload.get('ref', False)
+    repo_branch = get_github_branch(payload)
 
     if repo_branch is False:
-        repo_branch = payload.get('commits', False)
+        repo_branch = get_bitbucket_branch(payload)
         if repo_branch is False:
             return JsonResponse({'success': False, 'message': 'Not exist branch'})
-        repo_branch = repo_branch[0].get('branch', False)
-    else:
-        _, repo_branch = repo_branch.rsplit('/', 1)
 
     if not user and not repo and not name and not branch and not repo_branch:
         return JsonResponse({'success': False, 'message': 'No JSON data or URL argument : cannot identify hook'})
@@ -82,3 +79,23 @@ def get_payload(request):
         user = user.get('name', user.get('username', None))
 
     return payload, user, repo
+
+
+def get_github_branch(payload):
+    repo_branch = payload.get('ref', False)
+    if repo_branch is not False:
+        _, repo_branch = repo_branch.rsplit('/', 1)
+    return repo_branch
+
+
+def get_bitbucket_branch(payload):
+    repo_branch = payload.get('commits', False)
+    if repo_branch is False:
+        repo_branch = payload.get('push', False)
+        if repo_branch is False:
+            return repo_branch
+        repo_branch = repo_branch['changes'][0]['new']['name']
+        return repo_branch
+
+    repo_branch = repo_branch[0].get('branch', False)
+    return repo_branch
