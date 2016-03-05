@@ -3,6 +3,7 @@
 Small Django APP for managing Bitbucket or Github webhooks
 
 Tested on Python 2.7 and 3.4, with Django 1.7, 1.8 and 1.9. The minimum version of Django that covers this APP is 1.7, there began the maintenance of ```JsonResponse```
+*Note: You can use python 3.5. It not only works for Django 1.7*
 
 ## How to Install
 1. ```pip install django-bitbucket-hook```

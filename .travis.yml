@@ -2,7 +2,6 @@ language: python
 python:
  - "2.7"
  - "3.4"
- - "3.5"
 env:
  - DJANGO="django==1.7"
  - DJANGO="django==1.8"
@@ -11,7 +10,3 @@ install:
  - pip install $DJANGO
 script:
  - python setup.py test
-matrix:
- exclude:
-  - python: "3.5"
-   env: DJANGO=Django==1.7
