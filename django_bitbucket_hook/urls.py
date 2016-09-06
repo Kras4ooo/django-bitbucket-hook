@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django_bitbucket_hook import views
 
 urlpatterns = [
