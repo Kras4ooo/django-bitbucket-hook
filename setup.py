@@ -3,7 +3,7 @@ long_description = open('README.rst').read()
 
 setup(
     name='django-bitbucket-hook',
-    version='1.1.4',
+    version='1.2.5',
     packages=['django_bitbucket_hook', 'django_bitbucket_hook.migrations'],
     url='https://github.com/Kras4ooo/django-bitbucket-hook',
     license='Apache License Version 2.0',
